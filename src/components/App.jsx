@@ -7,7 +7,7 @@ import Form from './Form';
 import ContactList from './ContactList';
 import Filter from './Filter';
 
-const { getFilter, getContacts } = selectors;
+const { getFilter, getContacts, getVisibleContacts } = selectors;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,11 +32,7 @@ const App = () => {
     dispatch(deleteContact(id));
   };
 
-  const normalizedFilter = filter.toLowerCase();
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
-
+  const filteredContacts = useSelector(getVisibleContacts);
   return (
     <div>
       <h1>Phonebook</h1>
